@@ -1,0 +1,17 @@
+1. docker --version -> use to check the docker version and whether docker is installed or not.
+2. docker ps -> use to check the running container information
+3. docker ps -a -> Give the information about all the container irrespective of whether they are runnig or stopped.
+4. docker pull <image> -> use to pull docker image from docker hub or any docker registry
+   eg. docker pull image_name:tag -> docker pull mysql:latest
+5. docker run -it --name <set_container_name> -p local_port_id:public_port_id: -e <Envirnment varibale such as password> <image_name>   eg. docker run -it --name my-database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=test@123 mysql:latest
+   The above command is use to run the docker image in iterative mode. Here we used the name flag to assign a customer name to 
+   the containr, -p flag to expose the port locally and publically, -e to define the envirnment varibale if any like in mysql
+   case we have set the root password.
+6  docker run -d --name <set_container_name> -p local_port_id:public_port_id: -e <Envirnment varibale such as password> <image_name>    eg. docker run -d --name my-jenkins-server -p 8080:8080 jenkins:latest
+   The above command is use to run the docker image in daemon mode. Here we used the name flag to assign a customer name to
+   the containr, -p flag to expose the port locally and publically.
+7. docker images -> this command will give the existing images present in the machine.
+8. docker rm <container_name/container_id> -> Will remove/delete the existing container (Note: only if the container is stop)
+9. docker rmi <image_name/image_id> -> will remove/delete the image.
+10. docker stop <container_name/container_id> -> to stop a running container
+11. 
