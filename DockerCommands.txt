@@ -14,4 +14,6 @@
 8. docker rm <container_name/container_id> -> Will remove/delete the existing container (Note: only if the container is stop)
 9. docker rmi <image_name/image_id> -> will remove/delete the image.
 10. docker stop <container_name/container_id> -> to stop a running container
-11. 
+11. docker build <path_to_dockerfile_directory> -t <image_name>:<tag> -> This command is used to build image from the dockerfile.
+    eg. docker build . todao-app:django-app -> here the . represent the pwd where the Dockerfile is present or in case if the file is somewhere 
+    else give the path, -t flag used to provide tag along with the image name.
