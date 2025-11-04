@@ -1,0 +1,106 @@
+==========================
+Docker & Virtualization Notes
+==========================
+
+1. What is Docker:
+Docker is a tool that lets you package an application and everything it needs to run (like files, libraries, and settings) into a small unit called a container. Containers are like mini-computers inside your computer—they are lightweight, fast, and can run anywhere.
+
+2. What is Hypervisor / VMware:
+A Hypervisor is software that allows you to run multiple virtual computers (called virtual machines or VMs) on a single physical computer. VMware is one of the popular programs that does this.
+
+3. How Hypervisors use underlying hardware:
+Hypervisors talk to your computer's CPU, memory, storage, and network to give each virtual machine its own “slice” of the resources. Each VM acts like it has its own computer, even though they share the same physical machine.
+
+4. What is Docker Engine:
+Docker Engine is the core part of Docker. It runs in the background on your computer and handles creating, running, and managing containers.
+
+5. What is Docker Hub:
+Docker Hub is an online library of Docker images (ready-made container templates). You can download images from there or upload your own to share with others.
+
+6. What is a Dockerfile:
+A Dockerfile is a simple text file that tells Docker how to build a container. It lists instructions like:
+- Which base image to use
+- What files to copy
+- Which programs or packages to install
+- Which command to run when the container starts
+
+7. What a Dockerfile contains:
+Example content of a Dockerfile:
+# Use Ubuntu as the base image
+FROM ubuntu:latest
+
+# Install Python
+RUN apt-get update && apt-get install -y python3
+
+# Copy your app files
+COPY app.py /app/
+
+# Set working directory
+WORKDIR /app
+
+# Command to run the app
+CMD ["python3", "app.py"]
+
+8. Docker pull command:
+`docker pull` downloads a container image from Docker Hub to your computer.
+Example:
+docker pull ubuntu:latest
+
+9. Docker run command:
+`docker run` creates and starts a container from an image. You can also set a name, expose ports, and choose how to run it.
+Example:
+docker run -it -p 8080:80 --name mycontainer ubuntu:latest
+- `-it` → runs in interactive mode (lets you type commands inside)
+- `-p 8080:80` → maps port 80 inside the container to port 8080 on your computer
+- `--name mycontainer` → gives your container a name
+
+10. What is interactive mode (-it flag):
+Interactive mode lets you “enter” the container and run commands inside it, like using a terminal.
+
+11. What is daemon mode (-d flag):
+Daemon mode runs the container in the background so it keeps running without needing your terminal to stay open.
+
+12. Command to remove a Docker image:
+docker image rm <image_name>
+Example:
+docker image rm ubuntu:latest
+
+13. Commands to see Docker images and containers:
+- See all images on your computer:
+docker images
+- See all containers (running and stopped):
+docker ps -a
+
+14. What is a container:
+A container is like a mini-computer with everything your app needs to run. Containers are small, fast, and isolated from other apps on your computer.
+
+15. Example workflow (pull + run + expose port):
+# Pull an image
+docker pull nginx:latest
+
+# Run a container, expose port 8080, give a name
+docker run -d -p 8080:80 --name mynginx nginx:latest
+
+# Check running containers
+docker ps
+
+# Stop and remove the container
+docker stop mynginx
+docker rm mynginx
+
+16. Summary of common Docker commands:
+
+docker pull <image> -> Download image from Docker Hub
+docker run -it <image> -> Run container in interactive mode
+docker run -d <image> -> Run container in daemon mode
+docker ps -> See running containers
+docker ps -a -> See all containers
+docker images -> See all downloaded images
+docker image rm <image> -> Remove an image
+docker stop <container> -> Stop a running container
+docker rm <container> -> Remove a container
+
+==========================
+End of Notes
+==========================
+
