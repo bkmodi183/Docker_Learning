@@ -13,6 +13,7 @@ Commands:
 11. docker stack deploy -c <file.yaml> <custom-stack-name> -> This command is used to deploy the stack where -c means compose file.
 12.  docker service scale <service name≥=<replicas> -> Scale up your swarm with replicas
 13. docker service update --image <image> <service name> -> Update the swarm with new image
+14. docker service log <service_name> -> Gives the logs of the service
 
 
 Questions:
@@ -68,6 +69,7 @@ Project 2: Deploy stack
 3. docker stack deploy -c django-cluster.yaml django-stack -> here we have to pass two arguments first one is the yaml file that we want to deply and the second is
                                                               the custom stack name. Also, the -c here means compose file i.e. collect and run.
 4. Now check whether the service is be deplyoyed as expected or not.
+
 
 
 
