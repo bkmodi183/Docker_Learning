@@ -1,3 +1,20 @@
+Commands:
+1. sudo apt-get update -> to update the system
+2. sudo apt-get install docker.io -> to install the docker 
+3. sudo usermod -aG docker $USER -> to assign the current user to the docker group so that we do not need to run each command with sudo
+4. docker swarm init -> To initialize the master node
+4. docker swarm join-token worker -> give the token with which we will be joining the worker node to master node
+5. docker info -> will give the infromation about docker info and also about whether the current node is master node or not
+6. docker swarm node ls -> gives the list of node connected to the master node. This command can only be run on master node. If we try to run on worker node will throw an      error
+7. docker swarn node leave -> will leave the swarm
+8. docker service create --name <service_name> --replicas=<no_of_node_to_Replicate> --publish <port_no:port_no> <base_image> -> this command is used to create the service
+9. docker ps -> used to check the running container
+10. docker service ls -> to check the running services
+11. docker stack deploy -c <file.yaml> <custom-stack-name> -> This command is used to deploy the stack where -c means compose file.
+12.  docker service scale <service name≥=<replicas> -> Scale up your swarm with replicas
+13. docker service update --image <image> <service name> -> Update the swarm with new image
+
+
 Questions:
 
 1. Why we need docker swarm
@@ -19,7 +36,7 @@ Project one 1: Simple todo-app-service from the docker image
    as worker. But before we join worker node we need to make sure the security group of master node allow inbound rule at the port 2377 which allows worker node to connect 
    to the swarm network. 
 4. In this way swarm network created.
-5. docker service create --name todo-app-service --replicas 3 --publish 8001:8001 bkmodi183/todo-app-repo:latest -> This command creates one service with name todo-app-service
+5. docker service create --name todo-app-service --replicas 3 --publish 8001:8001 bkmodi183/todo-app-repo:latest -> This command creates one service with name todo-app-   service
    here the we have name flag to assign name to the service, replicas i.e. to how many worker nodes we need to replicate the task to run, publish to expose the port on which
    the service is going to run. 
    Note: Here when we declare the port while creating the service the same port gets exposed for worker node as well. We do not need to expose the port for worker node 
@@ -51,5 +68,6 @@ Project 2: Deploy stack
 3. docker stack deploy -c django-cluster.yaml django-stack -> here we have to pass two arguments first one is the yaml file that we want to deply and the second is
                                                               the custom stack name. Also, the -c here means compose file i.e. collect and run.
 4. Now check whether the service is be deplyoyed as expected or not.
+
 
 
