@@ -1,0 +1,89 @@
+Project 1: Simple ToDo App Service using Docker Swarm
+
+In this project, we will deploy a simple ToDo app service using a Docker image across a Docker Swarm cluster consisting of one master node and two worker nodes.
+
+🔹 Steps to Implement
+
+Create three nodes
+
+Set up one master node and two worker nodes (these can be EC2 instances, virtual machines, or local servers).
+
+Initialize Docker Swarm on the master node
+
+docker swarm init
+
+
+This command initializes the Swarm mode on the current node and makes it the master node.
+
+Join worker nodes to the Swarm cluster
+
+After initializing the Swarm, Docker automatically generates a join token.
+This token allows other nodes to join the Swarm as workers.
+
+Before joining the worker nodes, make sure that the security group (or firewall) of the master node allows inbound traffic on port 2377, which is required for worker nodes to connect to the Swarm network.
+
+Swarm network creation
+
+Once the worker nodes successfully join using the token, a Swarm network is created connecting all nodes.
+
+Create a Docker service
+
+docker service create --name todo-app-service --replicas 3 --publish 8001:8001 bkmodi183/todo-app-repo:latest
+
+
+This command creates a Docker service named todo-app-service.
+
+Flags used:
+
+--name → assigns a name to the service.
+
+--replicas → defines how many instances (tasks) of the service should run across the Swarm.
+
+--publish → exposes the specified port (8001) to make the service accessible externally.
+
+Note:
+When you publish a port in a Docker Swarm service, that port automatically becomes available on all nodes (master and workers).
+You do not need to expose the port separately on each node — this is one of the key advantages of Docker Swarm.
+
+List running services
+
+docker service ls
+
+
+Run this on the master node to see all the services running in the Swarm cluster.
+
+Check running containers
+
+docker ps
+
+
+Use this command on any node (master or worker) to view the containers running on that specific node.
+
+Verify deployment
+
+At this stage, your ToDo app containers should be running across all three nodes in the Swarm cluster.
+
+Test auto-healing
+
+Stop or remove a container on one of the worker nodes using:
+
+docker stop <container_id>
+
+
+Within a few seconds, the Swarm manager (master) will automatically detect the missing container and redeploy a new one on an available node — maintaining the desired replica count.
+
+This demonstrates Docker Swarm’s self-healing capability.
+
+🧠 Summary
+
+docker swarm init → Initializes the Swarm and makes the current node the master.
+
+docker swarm join → Adds worker nodes to the Swarm cluster.
+
+docker service create → Deploys a service across the Swarm with defined replicas and ports.
+
+docker service ls → Lists running services on the master node.
+
+docker ps → Lists containers running on the current node.
+
+Docker Swarm ensures high availability, load balancing, and automatic container recovery across all nodes.

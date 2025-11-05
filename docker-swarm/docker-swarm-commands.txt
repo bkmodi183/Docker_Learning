@@ -1,0 +1,15 @@
+1. sudo apt-get update -> to update the system
+2. sudo apt-get install docker.io -> to install the docker 
+3. sudo usermod -aG docker $USER -> to assign the current user to the docker group so that we do not need to run each command with      sudo
+4. docker swarm init -> To initialize the master node
+4. docker swarm join-token worker -> give the token with which we will be joining the worker node to master node
+5. docker info -> will give the infromation about docker info and also about whether the current node is master node or not
+6. docker swarm node ls -> gives the list of node connected to the master node. This command can only be run on master node. If we      try to run on worker node will throw an      error
+7. docker swarn node leave -> will leave the swarm
+8. docker service create --name <service_name> --replicas=<no_of_node_to_Replicate> --publish <port_no:port_no> <base_image> -> this    command is used to create the service
+9. docker ps -> used to check the running container
+10. docker service ls -> to check the running services
+11. docker stack deploy -c <file.yaml> <custom-stack-name> -> This command is used to deploy the stack where -c means compose file.
+12. docker service scale <service name≥=<replicas> -> Scale up your swarm with replicas
+13. docker service update --image <image> <service name> -> Update the swarm with new image
+14. docker service log <service_name> -> Gives the logs of the service
