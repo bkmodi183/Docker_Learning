@@ -29,3 +29,26 @@ Project one 1: Simple todo-app-service from the docker image
 8. Now the project is ready here the conatiners are running across all three nodes. 
 9. you can kill the container on one of the worker node and within seconds a new coantainer is created by the master node. 
 
+
+Project 2: Deploy stack 
+
+1. Create a directory -> mkdir deployments
+2. create a django-cluster.yaml file with the below details
+  version: '3.9'
+  services:
+  web:
+    container_name: Todo-app-django
+    image: bkmodi183/todo-app-repo:latest
+    ports:
+      - 8001:8001
+  db:
+    container_name: MySQL_DB
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 'test@123'
+3. docker stack deploy -c django-cluster.yaml django-stack -> here we have mentioned two arguments first one is the yaml file that we want to deply and the second is
+                                                              the custom stack name.
+4. Now check whether the service is be deplyoyed as expected or not.
+
