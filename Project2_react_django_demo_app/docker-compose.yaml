@@ -1,7 +1,14 @@
 version: '3.9'
-
 services:
   web:
+    container_name: Todo-app-django
     build: .
     ports:
-      - "8001:8001"
+      - 8001:8001
+  db:
+    container_name: MySQL_DB
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 'test@123'
