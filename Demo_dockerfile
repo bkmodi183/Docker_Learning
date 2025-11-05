@@ -1,0 +1,15 @@
+FROM python:3.9
+WORKDIR app
+COPY . /app
+RUN pip install -r requirements.txt 
+EXPOSE 8001
+CMD ["python","manage.py","runserver","0.0.0.0:8001"]
+
+
+#FROM ->  The entry point begins at FROM (it basically runs docker pull python:3.9 at the backend)
+#WORKDIR -> it tell the docker that from now onwards do all the action in this directory like
+#COPY Source Destination -> This copies files from your host machine into the Docker container.
+#Run -> this will run the commands mentioned corresonding to it and download all the dependencies which are required to run the application
+#EXPOSE -> this will tell the port number which is exposed to public in order to communicate with the application
+#CMD -> this will execute at the time of container run stage
+#diff betwenn RUN and CMD -> RUN execute during image building whereas CMD execute at the time of container staging
