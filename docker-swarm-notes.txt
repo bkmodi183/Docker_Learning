@@ -69,6 +69,21 @@ Project 2: Deploy stack
 3. docker stack deploy -c django-cluster.yaml django-stack -> here we have to pass two arguments first one is the yaml file that we want to deply and the second is
                                                               the custom stack name. Also, the -c here means compose file i.e. collect and run.
 4. Now check whether the service is be deplyoyed as expected or not.
+5.  docker service scale django-stack-db=3 -> Here once you verify all the containers are running as expected you can try to scale the db conatiner with the command
+6. Now we are going to do run time changes. Here we want to make change on the front page of the todo-app. Let's say we want to change the tittle of the page from todo-app
+   to My-Django-App then first we need to make the changes in the index.html file. Now since the app file changes so we need to again build the image and once the image is 
+   bult we need to push the image to the docker hub. Since from the docker hub the swarm stack is fetching the  image details. 
+7 After we pushed the updated image to the docker hub. Then we can use the below command to update replicate the changes to the live working todo-app.
+  docker service update --image bkmodi183/todo-app-repo:latest django-stack_web 
+  Once the above command executes the changes will successfully start reflecting over the web page.
+
+Learnig from Project 2: 
+* In this project we learn about how to deply service stack.
+* How to scale the service
+* We have made changes in the tittle of the index page and then built new image and pushed the updated image to the docker hub. Here the key learning is the running swarm
+  pulls the updated images from a central repository call docker hub. So what ever changes that we are performing won't reflect until we pushed the updated image to the 
+  docker hub.
+
 
 
 
