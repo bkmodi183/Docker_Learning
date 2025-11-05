@@ -6,10 +6,10 @@ Volumes are managed by Docker and can be shared between multiple containers, mak
 
 **Key Benefits:**
 
-📦 **Data persistence:** Keeps data safe even if containers are deleted or recreated.
-🔄 **Container sharing:** Multiple containers can access the same data.
-🛠️ **Easy backup & restore:** Volumes can be easily backed up, restored, or moved.
-⚙️ **Better performance:** More efficient than using bind mounts for Docker-managed data.
+1. **Data persistence:** Keeps data safe even if containers are deleted or recreated.
+2. **Container sharing:** Multiple containers can access the same data.
+3. **Easy backup & restore:** Volumes can be easily backed up, restored, or moved.
+4. **Better performance:** More efficient than using bind mounts for Docker-managed data.
 
 **Example Usage**
 
