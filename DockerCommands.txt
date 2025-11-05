@@ -18,5 +18,14 @@
     eg. docker build . todao-app:django-app -> here the . represent the pwd where the Dockerfile is present or in case if the file is    somewhere else give the path, -t flag used to provide tag along with the image name.
 12.docker exec -it <container_name_or_id> /bin/bash -> Open an interactive bash shell inside the running container 
    (use /bin/sh if bash isn't available) eg: docker exec -it my_container /bin/bash
-13. docker attach <container_name_or_id>  -> Attaches your terminal to the container. Use case: View and interact with a container's main process in real time or for real time
-    logs of the container (use Ctrl + p, Ctrl + q to detach safely) eg: docker attach my_container
+13. docker attach <container_name_or_id>  -> Attaches your terminal to the container. Use case: View and interact with a container's main process in real time or for real          time logs of the container (use Ctrl + p, Ctrl + q to detach safely) eg: docker attach my_container.
+14. docker volume create --name my-volume --opt type=none --opt device=<path_of_the_directory_to_which_the_docker_volume_is_going_to_point> --opt o=bind -> this command
+    is used to create a new docker volume. Here in device we give the path of local directory where the volumes folder are created to store and keep the container data
+    persistent. 
+    eg. docker volume create --name my-volume --opt type=none --opt device=/home/ubuntu/Docker_Learning/volumes/django-todo-volume --opt o=bind
+15. docker volume ls -> to list the docker volumes
+16. docker volume inspect <volume_name> -> To inspect the volume details like when it was created, where it is pointing etc.
+17. docker run -d --name <continer_name> --mount source=<volume_name>,target=<working_directory_of_container> <image_name:tag> -> this command is used to mount the docker 
+    volume to the container.
+    eg. docker run -d --mount source=my-volume,target=/app todo:latest
+18. docker volume rm <volume_name> -> to remove the docker volume
