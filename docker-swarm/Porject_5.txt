@@ -1,0 +1,39 @@
+Project 2: Deploy Stack
+
+1. Create a directory → mkdir deployments
+2. Create a django-cluster.yaml file with the following details:
+
+version: '3.9'
+services:
+  web:
+    container_name: Todo-app-django
+    image: bkmodi183/todo-app-repo:latest
+    ports:
+      - 8001:8001
+  db:
+    container_name: MySQL_DB
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 'test@123'
+
+
+3. Run docker stack deploy -c django-cluster.yaml django-stack → here we pass two arguments:
+   * First, the YAML file that we want to deploy.
+   * Second, the custom stack name.
+     The -c flag indicates the Compose file that Docker should collect and run.
+4. Check whether the services are deployed as expected and running correctly.
+5. Run docker service scale django-stack-db=3 → after verifying that all containers are running, you can scale the db service to run 3 replicas using this command.
+6. Perform runtime changes → for example, to change the title of the front page of the ToDo app from todo-app to My-Django-App, first update the index.html file.
+   Since the application files have changed, you need to rebuild the Docker image and push the updated image to Docker Hub, because the Swarm stack fetches images 
+   from Docker Hub.
+7. After pushing the updated image to Docker Hub, run: docker service update --image bkmodi183/todo-app-repo:latest django-stack_web
+   → This command updates the running service to use the new image. Once it executes, the changes (like the updated title) will start reflecting on the live web page.
+
+Learning from Project 2:
+
+1. In this project, we learned how to deploy a service stack using Docker Swarm.
+2. Learned how to scale a service dynamically using docker service scale.
+3. Learned how to make runtime changes in an application by rebuilding and pushing the updated image to Docker Hub. The key takeaway is that Swarm pulls the updated image from a central repository (Docker Hub) — so changes won’t reflect in the running services until the new image is pushed.
+4. This demonstrates how Docker Swarm allows for rolling updates, zero-downtime deployments, and centralized image management.
