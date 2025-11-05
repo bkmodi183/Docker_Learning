@@ -29,3 +29,12 @@
     volume to the container.
     eg. docker run -d --mount source=my-volume,target=/app todo:latest
 18. docker volume rm <volume_name> -> to remove the docker volume
+19 docker login -u <username> -> to login on docker hub
+20. sudo apt-get install docker-compose
+21. docker-compose up
+22. docker-compose down
+23. docker image tag <current_image_name:tag> <usernmae/current_image_name> -> Before pushing image to docker hub we need to rename the image name with username/current_name
+24. docker image push username/current_image_name -> After renaming the image use the command to push the image.
+    eg. docker image push bkmodi183/node-todo-app:latest 
+
+     
