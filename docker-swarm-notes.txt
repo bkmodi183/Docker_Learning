@@ -1,0 +1,31 @@
+Questions:
+
+1. Why we need docker swarm
+2. why we can't use docker in production
+3. what is docker swarm
+4. how docker swarm is different than kubernetes -> swarm is native to docker engine and k8 is all together a different tool
+5. Note: let's say a docker swarm architecture has 3 worker nodes and all three are running one container of todo-app. let's say worker 1 removed from the swarm by the command
+   docker swarm leave then in this case all the data or the task that the particular node is running with will automatically gets deleted. That's the beauty of docker swarm
+   that it is  secure no data leakes to worker node.
+7. in the above scenario if we kill the container from worker 2 so within a sec the docker master node will automatically creates another container. 
+8. docker swarm node ls -> only works on master node. if we run the command on worker node it will show and error response.
+9. 
+
+Project one 1: Simple todo-app-service from the docker image
+
+1. Create three nodes -> one master and two worker node
+2. docker swarm init -> this command will decide which node is going to be master node
+3. Once you run the docker swarm init in one of the node and officaily make it master node, it will generate a token with which we can allow other nodes to join the swarm
+   as worker. But before we join worker node we need to make sure the security group of master node allow inbound rule at the port 2377 which allows worker node to connect 
+   to the swarm network. 
+4. In this way swarm network created.
+5. docker service create --name todo-app-service --replicas 3 --publish 8001:8001 bkmodi183/todo-app-repo:latest -> This command creates one service with name todo-app-service
+   here the we have name flag to assign name to the service, replicas i.e. to how many worker nodes we need to replicate the task to run, publish to expose the port on which
+   the service is going to run. 
+   Note: Here when we declare the port while creating the service the same port gets exposed for worker node as well. We do not need to expose the port for worker node 
+         individually. That's the beauty of docker swarm. 
+6. docker service ls -> runs on master node and gives the details about service which are running
+7. docker ps -> will give the deatisl about container.
+8. Now the project is ready here the conatiners are running across all three nodes. 
+9. you can kill the container on one of the worker node and within seconds a new coantainer is created by the master node. 
+
