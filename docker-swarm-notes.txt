@@ -48,7 +48,8 @@ Project 2: Deploy stack
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: 'test@123'
-3. docker stack deploy -c django-cluster.yaml django-stack -> here we have mentioned two arguments first one is the yaml file that we want to deply and the second is
-                                                              the custom stack name.
+3. docker stack deploy -c django-cluster.yaml django-stack -> here we have to pass two arguments first one is the yaml file that we want to deply and the second is
+                                                              the custom stack name. Also, the -c here means compose file i.e. collect and run.
 4. Now check whether the service is be deplyoyed as expected or not.
+
 
