@@ -1,0 +1,120 @@
+-------------------------------------------------------------Docker Compose – Complete Notes------------------------------------------------------------------------------
+
+Docker Compose is a tool that allows you to define and run multi-container Docker applications using a single configuration file named docker-compose.yml. 
+Instead of running multiple docker build and docker run commands manually, Docker Compose lets you manage your entire application stack with one command.
+Docker Compose simplifies the process of managing multiple containers that work together. It uses a YAML file to define services, networks, and volumes 
+required for your application. Once defined, you can bring everything up or down with a single command.
+
+Command to start everything:
+docker-compose up -d
+
+------------------------------------------------------------------Use Cases of Docker Compose-------------------------------------------------------------------------------
+
+1. Running multi-container applications (for example, a web app with a database).
+2. Setting up complete local development environments easily.
+3. Integration and end-to-end testing for microservices.
+4. Sharing and reusing the same configuration across teams.
+5. Creating reproducible environments for CI/CD pipelines.
+6. Quickly bringing up or tearing down complex stacks with one command.
+
+---------------------------------------------------------------------Docker Compose in CI/CD----------------------------------------------------------------------------------
+
+In CI/CD pipelines, Docker Compose is extremely useful for spinning up the entire environment before running automated tests.
+
+Normally, pipelines can fail if one service (like a database) isn’t ready before another service starts.
+With Docker Compose, all dependencies are defined in one file, and using the depends_on property ensures that containers start in the correct order.
+
+Example:
+If your web container depends on a MySQL container, Compose ensures MySQL starts first — preventing common CI/CD issues like “database connection failed” or 
+“service not found”. 
+This makes CI/CD pipelines more stable and reliable by ensuring a consistent environment setup every time.
+
+-------------------------------------------------------------Difference Between Docker Build, Docker Run, and Docker Compose-------------------------------------------------
+Command	Purpose	Example	Description
+docker build	Builds an image from a Dockerfile	docker build -t myapp .	Used to create Docker images
+docker run	Runs a container from an image	docker run -d -p 8080:80 myapp	Runs one container manually
+docker-compose	Manages multiple containers	docker-compose up -d	Automates the build and run of multi-container apps
+
+---------------------------------------------------------------------------Simple difference---------------------------------------------------------------------------------
+
+1. docker build → Builds the image.
+2. docker run → Runs a single container.
+3. docker-compose → Defines, builds, and runs multi-container environments.
+
+--------------------------------------------------------------------Hands-On Example: Nginx + MySQL Setup---------------------------------------------------------------------
+
+Below is a complete example of a docker-compose.yml file that runs an Nginx web server with a MySQL database.
+
+version: '3.9'
+
+services:
+  web:
+    image: nginx:latest
+    container_name: web_container
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    volumes:
+      - ./html:/usr/share/nginx/html
+    networks:
+      - app_network
+
+  db:
+    image: mysql:5.7
+    container_name: db_container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app_network
+
+volumes:
+  db_data:
+
+networks:
+  app_network:
+
+
+----------------------------------------------------------Step-by-Step Implementation-----------------------------------------------------------------------
+
+1. Create a project folder -> mkdir docker-compose-demo && cd docker-compose-demo
+2. Create an html folder and add a simple web page
+   mkdir html
+   echo "<h1>Hello from Docker Compose!</h1>" > html/index.html
+3. Save the above YAML content in a file named docker-compose.yml
+4. Start the services
+   docker-compose up -d
+5. Check if containers are running -> docker ps
+6. Open your browser and visit -> http://localhost:8080
+7. Stop and clean up everything -> docker-compose down
+
+--------------------------------------------------------------------------Quick Command Summary------------------------------------------------------------------------------
+
+1. docker build -t myapp . → Builds a Docker image
+2. docker run -d -p 8080:80 myapp → Runs a single container
+3. docker-compose up -d → Starts all services defined in the YAML file
+4. docker-compose down → Stops and removes all containers, networks, and volumes
+5. docker-compose logs -f → Shows real-time logs from all containers
+6. docker-compose ps → Lists all running containers
+
+--------------------------------------------------------------------------Key Points to Remember-----------------------------------------------------------------------------
+
+1. The default file name is docker-compose.yml
+2. You can scale containers easily using: docker-compose up --scale web=3
+3. Compose automatically creates a dedicated network for communication between containers.
+4. You can define environment variables in a .env file.
+5. It supports volumes, build contexts, restart policies, and service dependencies.
+6. In CI/CD, Compose ensures all services start in the correct order, reducing deployment errors.
+7. It simplifies local development and testing of multi-container applications.
+
+--------------------------------------------------------------------------------Summary-------------------------------------------------------------------------------------
+
+1. Docker Compose is the easiest way to manage multi-container environments.
+2. It simplifies local setups, testing, and CI/CD automation.
+3. It ensures consistent and reproducible environments for development and deployment.
+4. Use docker build for creating images, docker run for quick tests, and docker-compose to orchestrate your full stack.
