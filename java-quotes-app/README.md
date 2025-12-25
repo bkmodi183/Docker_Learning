@@ -62,7 +62,4 @@ To customize the quotes, edit `quotes.txt` and restart the application. Each quo
 ## License
 This project is licensed under the MIT License.
 
-## Author
-[TrainWithShubham](https://github.com/LondheShubham153)
-
 
