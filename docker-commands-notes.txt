@@ -41,5 +41,7 @@
     Before pushing image to docker hub we need to rename the image name with username/current_name
 24. docker image push username/current_image_name -> After renaming the image use the command to push the image.
     eg. docker image push bkmodi183/node-todo-app:latest 
-
+25. docker build --platform=linux/amd64 -t java-quotes-app . -> --platform=linux/amd64 ensures the Docker image is built for Intel/AMD Linux, 
+    even if your host machine is Mac (ARM), Windows, or any other OS. This flag lets you match the image’s OS and CPU architecture to the 
+    target environment(i.e. linux amd64 where the app is going to run), ensuring compatibility.
      
