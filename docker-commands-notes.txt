@@ -3,11 +3,13 @@
 3. docker ps -a -> Give the information about all the container irrespective of whether they are runnig or stopped.
 4. docker pull <image> -> use to pull docker image from docker hub or any docker registry
    eg. docker pull image_name:tag -> docker pull mysql:latest
-5. docker run -it --name <set_container_name> -p local_port_id:public_port_id: -e <Envirnment varibale such as password> <image_name>   eg. docker run -it --name my-database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=test@123 mysql:latest
+5. docker run -it --name <set_container_name> -p local_port_id:public_port_id: -e <Envirnment varibale such as password> <image_name>   
+   eg. docker run -it --name my-database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=test@123 mysql:latest
    The above command is use to run the docker image in iterative mode. Here we used the name flag to assign a customer name to 
    the containr, -p flag to expose the port locally and publically, -e to define the envirnment varibale if any like in mysql
    case we have set the root password.
-6  docker run -d --name <set_container_name> -p local_port_id:public_port_id: -e <Envirnment varibale such as password> <image_name>    eg. docker run -d --name my-jenkins-server -p 8080:8080 jenkins:latest
+6  docker run -d --name <set_container_name> -p local_port_id:public_port_id: -e <Envirnment varibale such as password> <image_name>    
+   eg. docker run -d --name my-jenkins-server -p 8080:8080 jenkins:latest
    The above command is use to run the docker image in daemon mode. Here we used the name flag to assign a customer name to
    the containr, -p flag to expose the port locally and publically.
 7. docker images -> this command will give the existing images present in the machine.
@@ -15,25 +17,28 @@
 9. docker rmi <image_name/image_id> -> will remove/delete the image.
 10. docker stop <container_name/container_id> -> to stop a running container
 11. docker build <path_to_dockerfile_directory> -t <image_name>:<tag> -> This command is used to build image from the dockerfile.
-    eg. docker build . todao-app:django-app -> here the . represent the pwd where the Dockerfile is present or in case if the file is    somewhere else give the path, -t flag used to provide tag along with the image name.
+    eg. docker build . todao-app:django-app -> here the . represent the pwd where the Dockerfile is present or in case if the file is  
+        somewhere else give the path, -t flag used to provide tag along with the image name.
 12.docker exec -it <container_name_or_id> /bin/bash -> Open an interactive bash shell inside the running container 
    (use /bin/sh if bash isn't available) eg: docker exec -it my_container /bin/bash
-13. docker attach <container_name_or_id>  -> Attaches your terminal to the container. Use case: View and interact with a container's main process in real time or for real          time logs of the container (use Ctrl + p, Ctrl + q to detach safely) eg: docker attach my_container.
-14. docker volume create --name my-volume --opt type=none --opt device=<path_of_the_directory_to_which_the_docker_volume_is_going_to_point> --opt o=bind -> this command
-    is used to create a new docker volume. Here in device we give the path of local directory where the volumes folder are created to store and keep the container data
-    persistent. 
+13. docker attach <container_name_or_id>  -> Attaches your terminal to the container. Use case: View and interact with a container's main process in 
+    real time or for real time logs of the container (use Ctrl + p, Ctrl + q to detach safely) eg: docker attach my_container.
+14. docker volume create --name my-volume --opt type=none --opt device=<path_of_the_directory_to_which_the_docker_volume_is_going_to_point> --opt o=bind -> 
+    this command is used to create a new docker volume. Here in device we give the path of local directory where the volumes folder are created to store and
+    keep the container data persistent. 
     eg. docker volume create --name my-volume --opt type=none --opt device=/home/ubuntu/Docker_Learning/volumes/django-todo-volume --opt o=bind
 15. docker volume ls -> to list the docker volumes
 16. docker volume inspect <volume_name> -> To inspect the volume details like when it was created, where it is pointing etc.
-17. docker run -d --name <continer_name> --mount source=<volume_name>,target=<working_directory_of_container> <image_name:tag> -> this command is used to mount the docker 
-    volume to the container.
+17. docker run -d --name <continer_name> --mount source=<volume_name>,target=<working_directory_of_container> <image_name:tag> -> 
+    this command is used to mount the docker volume to the container.
     eg. docker run -d --mount source=my-volume,target=/app todo:latest
 18. docker volume rm <volume_name> -> to remove the docker volume
 19 docker login -u <username> -> to login on docker hub
 20. sudo apt-get install docker-compose
 21. docker-compose up
 22. docker-compose down
-23. docker image tag <current_image_name:tag> <usernmae/current_image_name> -> Before pushing image to docker hub we need to rename the image name with username/current_name
+23. docker image tag <current_image_name:tag> <usernmae/current_image_name> -> 
+    Before pushing image to docker hub we need to rename the image name with username/current_name
 24. docker image push username/current_image_name -> After renaming the image use the command to push the image.
     eg. docker image push bkmodi183/node-todo-app:latest 
 
