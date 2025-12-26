@@ -54,4 +54,5 @@
 32. docker build -f ./custom-dockerfile-name -t <image-name>:tag . -> used to build a image from a custom docker file name. '-f'
     denotes file and './' give the path to the file
     eg. docker build -f ./Docker-multi-stage -t python:latest .
-
+34. docker run -d -e <ENV_VAR>=<value> -v <volume-name>:<container-path> --name <container-name> <image-name>:<tag>
+    eg. docker run -d -e MYSQL_ROOT_PASSWORD=root -v mysql-volume:/var/lib/mysql --name mysql-ctr mysql:latest
