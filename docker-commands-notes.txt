@@ -49,7 +49,9 @@
 28. * docker images -aq -> gives only the image IDs
 29. * docker rm $(docker pa -aq) -> remove all the stopped containers without docker system prune command
 30. * docker rmi $(docker images -aq) -> remove all the unused images without docker system prune command 
-31. docker tag <image_name>:tag <docker_hub_username>/<image_name>:tag -> this command is used to tag the local image in certain format before pushing to docker hub
-                                          repo. eg. docker tag python-app-mini:latest bkmodi183/python-app-mini:latest
-                                                    docker push bkmodi183/python-app-mini
+31. docker tag <image_name>:tag <docker_hub_username>/<image_name>:tag -> this command is used to tag the local image in certain         format before pushing to docker hub repo. eg. docker tag python-app-mini:latest bkmodi183/python-app-mini:latest
+                                            docker push bkmodi183/python-app-mini
+32. docker build -f ./custom-dockerfile-name -t <image-name>:tag . -> used to build a image from a custom docker file name. '-f'
+    denotes file and './' give the path to the file
+    eg. docker build -f ./Docker-multi-stage -t python:latest .
 
