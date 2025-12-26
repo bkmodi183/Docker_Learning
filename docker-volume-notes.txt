@@ -8,6 +8,8 @@ Docker volumes allow you to persist data outside containers, ensuring it is not 
 Volumes support two-way communication:
 - Data written by the container to the volume is accessible on the host.
 - Data added or modified on the host is reflected inside the container.
+- You can restrict access: mount a volume as read-only (container can only read) or write-only (container can only write).
+- Multiple containers can share the same volume, allowing them to read/write common data.
 
 -------------------------------------------------------------------------------------------------------------
 
