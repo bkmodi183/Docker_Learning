@@ -1,0 +1,127 @@
+                                          Docker Volume – Hands-On Activity
+
+--------------------------------------------------------------------------------------------------------------
+
+Docker Volumes by creating a MySQL container and persisting its data using a Docker-managed volume.
+
+--------------------------------------------------------------------------------------------------------------
+
+Step 1: Create a Docker Volume
+
+Command: docker volume create mysql-volume
+
+Explanation:
+- Creates a Docker-managed storage space
+- Stored on the host machine
+- Independent of any container
+- Used to persist MySQL data
+
+--------------------------------------------------------------------------------------------------------------
+
+Step 2: List All Docker Volumes
+
+Command: docker volume ls
+
+Explanation:
+- Lists all Docker volumes on the host
+- Helps verify that mysql-volume exists
+
+Example Output:
+DRIVER    VOLUME NAME
+local     mysql-volume
+
+--------------------------------------------------------------------------------------------------------------
+
+Step 3: Inspect the Docker Volume
+
+Command: docker volume inspect mysql-volume
+
+Explanation:
+  - Shows volume details such as:
+  - Creation time
+  - Driver
+  - Mountpoint on host
+
+Important Note: The Mountpoint path (e.g. /var/lib/docker/volumes/mysql-volume/_data) 
+is for information only. DO NOT use this path in docker run commands.
+
+--------------------------------------------------------------------------------------------------------------
+
+Step 4: Run MySQL Container with Volume Mounted
+
+Command: 
+
+docker run -d -e <ENV_VAR>=<value> -v <volume-name>:<container-path> --name <container-name> <image-name>:<tag>
+
+eg. docker run -d -e MYSQL_ROOT_PASSWORD=root -v mysql-volume:/var/lib/mysql --name mysql-ctr mysql:latest
+
+Explanation of Command Parts
+
+'docker run' - Creates and starts a container
+
+'-d'- Runs container in detached (background) mode
+
+'-e MYSQL_ROOT_PASSWORD=root'
+
+- Sets environment variable
+- Required by MySQL image
+- Sets root password
+
+'-v mysql-volume:/var/lib/mysql'
+
+- Volume mapping
+- mysql-volume = Docker volume name (created earlier)
+- /var/lib/mysql = MySQL data directory inside container
+- Ensures data persistence
+
+'--name mysql-ctr'
+
+- Assigns a custom name to the container
+
+'mysql:latest'
+
+- Image name: mysql
+- Tag: latest
+
+--------------------------------------------------
+
+Step 5: Verify Container is Running
+
+Command: docker ps
+
+Expected Result: mysql-ctr should be listed as running
+
+--------------------------------------------------
+
+Step 6: Verify Data Persistence
+
+Enter MySQL: docker exec -it mysql-ctr mysql -uroot -proot
+
+Create Database:
+CREATE DATABASE testdb;
+
+Exit and remove container:
+docker stop ctr && docker rm ctr
+
+Re-run container with same volume:
+
+docker run -d -e MYSQL_ROOT_PASSWORD=root -v mysql-volume:/var/lib/mysql --name mysql-ctr mysql:latest
+
+Check databases:
+SHOW DATABASES;
+
+Expected Result:
+testdb still exists
+
+--------------------------------------------------
+
+Key Takeaways:
+- Docker volumes persist data outside containers
+- Containers can be deleted without data loss
+- Volumes are mounted to application data directories
+- Docker manages volume storage internally
+
+--------------------------------------------------
+
+Summary:Docker Volume = Persistent storage managed by Docker, independent of containers
+
