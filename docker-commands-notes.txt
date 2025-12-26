@@ -5,9 +5,9 @@
    eg. docker pull image_name:tag -> docker pull mysql:latest
 5. docker run -it --name <set_container_name> -p local_port_id:public_port_id: -e <Envirnment varibale such as password> <image_name>   
    eg. docker run -it --name my-database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=test@123 mysql:latest
-   The above command is use to run the docker image in iterative mode. Here we used the name flag to assign a customer name to 
-   the containr, -p flag to expose the port locally and publically, -e to define the envirnment varibale if any like in mysql
-   case we have set the root password.
+   The above command is use to run the docker image in an iterative mode or we can say in an interactive terminal. 
+   Here we used the name flag to assign a customer name to the containr, -p flag to expose the port locally and publically, 
+   -e to define the envirnment varibale if any like in mysql case we have set the root password.
 6  docker run -d --name <set_container_name> -p local_port_id:public_port_id: -e <Envirnment varibale such as password> <image_name>    
    eg. docker run -d --name my-jenkins-server -p 8080:8080 jenkins:latest
    The above command is use to run the docker image in daemon mode. Here we used the name flag to assign a customer name to
