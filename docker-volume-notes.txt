@@ -174,10 +174,3 @@ Key Takeaways:
 Summary:Docker Volume = Persistent storage managed by Docker, independent of containers
 
 --------------------------------------------------------------------------------------------------------------
-
-The above is the simple example of how we can map a docker volume with mysql container to keep the data persistent. 
-Likewise you can map the volumes to different containers as per the need. The volumes attach is having two way communication. Which means if somethign from the container is keeping saved inside the volume it wil reflect on the local and if some data is kept inside the volume from the lcoal then it will reflect inside the container.
-
-Use cases of the volumes:
-- To keep the real time logs of the containers inside the volume for troubleshooting purposes.
-etc
