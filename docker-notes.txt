@@ -99,6 +99,11 @@ docker images -> See all downloaded images
 docker image rm <image> -> Remove an image
 docker stop <container> -> Stop a running container
 docker rm <container> -> Remove a container
+docker system prune -> delete all the stopped containers, unused images, unused networks, unused images, build caches etc. Helps in disk cleaning.
+docker ps -aq -> gives only the container IDs
+docker images -aq -> gives only the image IDs
+docker rm $(docker pa -aq) -> remove all the stopped containers without docker system prune command
+docker rmi $(docker images -aq) -> remove all the unused images without docker system prune command 
 
 ==========================
 End of Notes
