@@ -44,4 +44,8 @@
 25. docker build --platform=linux/amd64 -t java-quotes-app . -> --platform=linux/amd64 ensures the Docker image is built for Intel/AMD Linux, 
     even if your host machine is Mac (ARM), Windows, or any other OS. This flag lets you match the image’s OS and CPU architecture to the 
     target environment(i.e. linux amd64 where the app is going to run), ensuring compatibility.
-     
+26. * docker system prune -> delete all the stopped containers, unused images, unused networks, unused images, build caches etc. Helps in disk cleaning.
+27. * docker ps -aq -> gives only the container IDs
+28. * docker images -aq -> gives only the image IDs
+29. * docker rm $(docker pa -aq) -> remove all the stopped containers without docker system prune command
+30. * docker rmi $(docker images -aq) -> remove all the unused images without docker system prune command 
