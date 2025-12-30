@@ -1,12 +1,13 @@
 ---------------------------------Docker Compose – Complete Notes------------------------------
 
-Docker Compose is a tool that allows you to define and run multi-container Docker applications using a single configuration file named docker-compose.yml. 
-Instead of running multiple docker build and docker run commands manually, Docker Compose lets you manage your entire application stack with one command.
-Docker Compose simplifies the process of managing multiple containers that work together. It uses a YAML file to define services, networks, and volumes 
-required for your application. Once defined, you can bring everything up or down with a single command.
+Docker Compose is a tool that allows you to define and run multi-container Docker applications 
+using a single configuration file named docker-compose.yml. Instead of running multiple docker 
+build and docker run commands manually, Docker Compose lets you manage your entire application 
+stack with one command. Docker Compose simplifies the process of managing multiple containers 
+that work together. It uses a YAML file to define services, networks, and volumes  required for 
+your application. Once defined, you can bring everything up or down with a single command.
 
-Command to start everything:
-docker-compose up -d
+Command to start everything: docker-compose up -d
 
 -----------------------------------Use Cases of Docker Compose----------------------------------
 
@@ -19,22 +20,25 @@ docker-compose up -d
 
 -------------------------------------Docker Compose in CI/CD-------------------------------------
 
-In CI/CD pipelines, Docker Compose is extremely useful for spinning up the entire environment before running automated tests.
+In CI/CD pipelines, Docker Compose is extremely useful for spinning up the entire environment before 
+running automated tests.
 
 Normally, pipelines can fail if one service (like a database) isn’t ready before another service starts.
-With Docker Compose, all dependencies are defined in one file, and using the depends_on property ensures that containers start in the correct order.
+With Docker Compose, all dependencies are defined in one file, and using the depends_on property ensures
+that containers start in the correct order.
 
 Example:
-If your web container depends on a MySQL container, Compose ensures MySQL starts first — preventing common CI/CD issues like “database connection failed” or 
-“service not found”. 
+If your web container depends on a MySQL container, Compose ensures MySQL starts first — preventing 
+common CI/CD issues like “database connection failed” or “service not found”. 
 This makes CI/CD pipelines more stable and reliable by ensuring a consistent environment setup every time.
+
 
 ------------------------------------Difference Between Docker Build, Docker Run, and Docker Compose----------------
 
 Command	Purpose	Example	Description
-docker build	Builds an image from a Dockerfile	docker build -t myapp .	Used to create Docker images
-docker run	Runs a container from an image	docker run -d -p 8080:80 myapp	Runs one container manually
-docker-compose	Manages multiple containers	docker-compose up -d	Automates the build and run of multi-container apps
+1. docker build	Builds an image from a Dockerfile. eg.	docker build -t myapp .	(Used to create Docker images)
+2. docker run	Runs a container from an image. eg. docker run -d -p 8080:80 myapp	(Runs one container manually_
+3. docker-compose	Manages multiple containers. eg.	docker-compose up -d	Automates the build and run of multi-container apps
 
 
 ---------------------------------------Simple difference-------------------------------------------------
@@ -93,7 +97,7 @@ networks:
    docker-compose up -d
 5. Check if containers are running -> docker ps
 6. Open your browser and visit -> http://localhost:8080
-7. Stop and clean up everything -> docker-compose down
+7. To Stop and clean up everything -> docker-compose down
 
 --------------------------------------Quick Command Summary------------------------------------------
 
@@ -121,4 +125,4 @@ networks:
 3. It ensures consistent and reproducible environments for development and deployment.
 4. Use docker build for creating images, docker run for quick tests, and docker-compose to orchestrate your full stack.
 
-
+------------------------------------------------------------------------------------------------------------------------------
