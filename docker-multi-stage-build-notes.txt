@@ -1,17 +1,23 @@
+=====================================================
 Multi-stage Docker Builds and Distroless Images Notes
-====================================================
+=====================================================
 
 ------------------------------------------------------------------------------------------------------------------------------
 1. What are Multi-stage Docker Builds:
 
-A **multi-stage Docker build** is a way to build smaller, cleaner, and more secure Docker images.  
-It lets you use **multiple FROM statements** in a single Dockerfile — where each stage can have its own base image.
+A multi-stage Docker build is a way to build smaller, cleaner, and more secure Docker images.  
+It lets you use multiple FROM statements in a single Dockerfile — where each stage can 
+have its own base image.
 
 The main idea:
-- Use one stage for **building or compiling code**.
-- Use another stage (final image) for **running** the application.
+- Use one stage for building or compiling code.
+- Use another stage (final image) for running the application.
 
-This avoids copying unnecessary build tools, dependencies, or files into the final image.
+This avoids copying unnecessary build tools, dependencies, or files into the final image due to which
+final images becomes light weight and more secure.
+
+Multi-stage builds separate the build environment from the runtime environment, ensuring that the final image 
+contains only the necessary runtime files and dependencies, reducing image size and improving security.
 
 ------------------------------------------------------------------------------------------------------------------------------
 2. Why We Need Multi-stage Builds:
@@ -22,15 +28,17 @@ That makes it:
 - Slower to download or deploy 🐢  
 - Less secure 🔒  
 
-Multi-stage builds solve this by **keeping only what’s needed to run the app**.
+Multi-stage builds solve this by keeping only what’s needed to run the app.
 
 Example:
+
 It’s like cooking — you don’t serve the cutting board and dirty utensils to the customer, only the finished dish.
 
 ------------------------------------------------------------------------------------------------------------------------------
 3. Example: Multi-stage Dockerfile
 
-**Example 1: Node.js**
+Example 1: Node.js
+
 Stage 1: Build the app
 
 FROM node:18 AS builder
@@ -47,8 +55,17 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 CMD ["node", "dist/server.js"]
 
+In this multi-stage Dockerfile, Stage 1 (builder) is used to build and compile the application. 
+It installs all required dependencies and runs the build process to generate the production-ready artifacts.
 
-**Example 2: Go application**
+Stage 2 is used to run the application. Only the compiled or built output from Stage 1 is copied into this stage, 
+along with the minimum runtime dependencies required to execute the application. This stage uses a lightweight base 
+image (node:18-alpine), which includes a minimal Linux OS and fewer system libraries, resulting in a smaller and 
+more secure final image. Build-time tools and unnecessary dependencies are excluded from the final image.
+
+------------------------------------------------------------------------------------------------------------------------------ 
+
+Example 2: Go application
 
 Stage 1: Build binary
 
@@ -65,7 +82,7 @@ COPY --from=builder /app/myapp .
 CMD ["./myapp"]
 
 
-In both examples, the final image contains **only what is needed to run** the app — no extra tools or dependencies.
+In both examples, the final image contains only what is needed to run the app — no extra tools or dependencies.
 
 ------------------------------------------------------------------------------------------------------------------------------
 4. Benefits of Multi-stage Builds:
@@ -78,11 +95,11 @@ In both examples, the final image contains **only what is needed to run** the ap
 ------------------------------------------------------------------------------------------------------------------------------
 5. What are Distroless Images:
 
-**Distroless images** are Docker images that contain **only your application and its runtime dependencies** — no shell, package manager, or extra OS tools.
+Distroless images are Docker images that contain only your application and its runtime dependencies.
+— no shell, package manager, or extra OS tools.
 
 They are built by Google and available at:
 gcr.io/distroless/<language>
-
 
 Examples:
 - `gcr.io/distroless/nodejs`
@@ -94,15 +111,15 @@ They are called “distroless” because they do not include a Linux distributio
 ------------------------------------------------------------------------------------------------------------------------------
 6. Why Use Distroless Images:
 
-- **Security:** Fewer tools = smaller attack surface 🔐  
-- **Smaller Size:** Lightweight and fast ⚡  
-- **Stability:** Fewer system dependencies to break  
-- **Compliance:** Harder for attackers to get shell access  
+- Security: Fewer tools = smaller attack surface 🔐  
+- Smaller Size: Lightweight and fast ⚡  
+- Stability: Fewer system dependencies to break  
+- Compliance: Harder for attackers to get shell access  
 
-Example:
-If a hacker gains access, a distroless container has **no shell or package manager**, so attacks are much harder.
+Example: If a hacker gains access, a distroless container has no shell or package manager, so attacks are much harder.
 
 ------------------------------------------------------------------------------------------------------------------------------
+
 7. Example: Using Distroless Image
 
 For a Go app:
@@ -122,12 +139,12 @@ USER nonroot:nonroot
 CMD ["./myapp"]
 
 
-The final image contains **only the binary**, making it small and secure.
+The final image contains only the binary, making it small and secure.
 
 ------------------------------------------------------------------------------------------------------------------------------
 8. Multi-Stage + Distroless Together:
 
-You can combine **multi-stage builds** with **distroless images** for maximum optimization.
+You can combine multi-stage builds with distroless images for maximum optimization.
 
 Example:
 FROM node:18 AS builder
@@ -161,7 +178,7 @@ CMD ["dist/server.js"]
 ------------------------------------------------------------------------------------------------------------------------------
 10. Analogy:
 
-Multi-stage builds are like **preparing a dish in multiple steps** — only the final plated meal is served.  
-Distroless images are like **serving the meal on a clean plate without any extra kitchen tools** — nothing extra, just what’s needed to enjoy it.
+Multi-stage builds are like preparing a dish in multiple steps — only the final plated meal is served.  
+Distroless images are like serving the meal on a clean plate without any extra kitchen tools — nothing extra, just what’s needed to enjoy it.
 
 ------------------------------------------------------------------------------------------------------------------------------
