@@ -1,1 +1,45 @@
+-------------------------------------------------------------------------------------------------------------
+                                        Docker Architecture
+-------------------------------------------------------------------------------------------------------------
 
+Docker Engine works across multiple components to create and run containers. Docker CLI sends commands to the
+Docker daemon, which manages Docker resources and uses containerd and runc to create and run containers using 
+Linux kernel features.
+-------------------------------------------------------------------------------------------------------------
+
+__________________________
+Architecture Flow Diagram:
+__________________________
+                                  Docker CLI 
+                                      ↓
+                             Docker Daemon (dockerd)
+                                      ↓
+                                 containerd 
+                                      ↓
+                                    |runc|
+                                      ↓
+                                 Linux Kernel 
+
+-------------------------------------------------------------------------------------------------------------
+
+1. Docker CLI (Client): Docker CLI is the command-line interface that allows users to interact with Docker
+   by sending commands to the Docker daemon using a REST API.
+
+-------------------------------------------------------------------------------------------------------------
+
+2. Docker Daemon (dockerd): The Docker daemon acts as a manager that handles Docker objects such as images, 
+   containers, networks, and volumes. It receives requests from the Docker CLI and communicates with 
+   containerd to manage container lifecycles.
+
+-------------------------------------------------------------------------------------------------------------
+
+3. containerd: containerd is a container runtime that runs in the background as part of the Docker Engine. 
+   It is responsible for pulling images, managing storage, and controlling the lifecycle of containers. 
+   containerd uses a low-level runtime to actually create and run containers.
+
+-------------------------------------------------------------------------------------------------------------
+
+4. runc: runc is the low-level container runtime used by containerd to create containers by interacting 
+   directly With Linux kernel features such as namespaces and cgroups.
+
+-------------------------------------------------------------------------------------------------------------
