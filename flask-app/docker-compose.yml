@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  flask-app:
+    build: .
+    container_name: flask-ctr
+    ports:
+      - "80:80"
