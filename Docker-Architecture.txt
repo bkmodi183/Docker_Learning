@@ -16,7 +16,7 @@ __________________________
                                       ↓
                                  containerd 
                                       ↓
-                                    |runc|
+                                     runc
                                       ↓
                                  Linux Kernel 
 
