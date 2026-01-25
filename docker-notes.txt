@@ -3,19 +3,25 @@ Docker & Virtualization Notes
 ==========================
 
 1. What is Docker:
-Docker is a tool that lets you package an application and everything it needs to run (like files, libraries, and settings) into a small unit called a container. Containers are like mini-computers inside your computer—they are lightweight, fast, and can run anywhere.
+Docker is a tool that lets you package an application and everything it needs to run (like files, libraries, and settings) 
+into a small unit called a container. Containers are like mini-computers inside your computer—they are lightweight, fast, 
+and can run anywhere.
 
 2. What is Hypervisor / VMware:
-A Hypervisor is software that allows you to run multiple virtual computers (called virtual machines or VMs) on a single physical computer. VMware is one of the popular programs that does this.
+A Hypervisor is software that allows you to run multiple virtual computers (called virtual machines or VMs) on a single 
+physical computer. VMware is one of the popular programs that does this.
 
 3. How Hypervisors use underlying hardware:
-Hypervisors talk to your computer's CPU, memory, storage, and network to give each virtual machine its own “slice” of the resources. Each VM acts like it has its own computer, even though they share the same physical machine.
+Hypervisors talk to your computer's CPU, memory, storage, and network to give each virtual machine its own “slice” of 
+the resources. Each VM acts like it has its own computer, even though they share the same physical machine.
 
 4. What is Docker Engine:
-Docker Engine is the core part of Docker. It runs in the background on your computer and handles creating, running, and managing containers.
+Docker Engine is the core part of Docker. It runs in the background on your computer and handles creating, running, 
+and managing containers.
 
 5. What is Docker Hub:
-Docker Hub is an online library of Docker images (ready-made container templates). You can download images from there or upload your own to share with others.
+Docker Hub is an online library of Docker images (ready-made container templates). You can download images from there 
+or upload your own to share with others.
 
 6. What is a Dockerfile:
 A Dockerfile is a simple text file that tells Docker how to build a container. It lists instructions like:
@@ -99,7 +105,8 @@ docker images -> See all downloaded images
 docker image rm <image> -> Remove an image
 docker stop <container> -> Stop a running container
 docker rm <container> -> Remove a container
-docker system prune -> delete all the stopped containers, unused images, unused networks, unused images, build caches etc. Helps in disk cleaning.
+docker system prune -> delete all the stopped containers, unused images, unused networks, unused images, 
+                       build caches etc. Helps in disk cleaning.
 docker ps -aq -> gives only the container IDs
 docker images -aq -> gives only the image IDs
 docker rm $(docker pa -aq) -> remove all the stopped containers without docker system prune command
