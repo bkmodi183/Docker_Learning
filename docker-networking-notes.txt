@@ -28,15 +28,15 @@ A restaurant kitchen where cooks (containers) share ingredients (data) through a
 3. Types of Docker Networks:
 
 
-| Network Type  | Description                                                                                      | Example Use |
-|---------------|--------------|-------------|
-| **bridge**    | Default network for standalone containers. Containers on the same bridge can talk to each other. | Small apps on one machine |
+| Network Type  |                                           Description                                            |                Example Use                |
+|---------------|--------------|-------------|--------------|-------------|--------------|-------------|-----------|-------------|--------------|--------------|
+| **bridge**    | Default network for standalone containers. Containers on the same bridge can talk to each other. | Small apps on one machine                 |
 | **host**      | Shares the host system’s network. No isolation.                                                  | When you want direct access to host ports |
-| **none**      | No network at all. Fully isolated.                                                               | For testing isolation |
-| **overlay**   | Connects containers across multiple machines (used in Swarm).                                    | Multi-host applications |
-| **macvlan**   | Assigns a MAC and IP to each container on your LAN.                                              | Advanced setups and network integration |
+| **none**      | No network at all. Fully isolated.                                                               | For testing isolation                     |
+| **overlay**   | Connects containers across multiple machines (used in Swarm).                                    | Multi-host applications                   |
+| **macvlan**   | Assigns a MAC and IP to each container on your LAN.                                              | Advanced setups and network integration   |
 
-------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
 4. How to View Available Networks:
 
 Command: docker network ls
